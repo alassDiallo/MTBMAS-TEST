@@ -1,0 +1,1188 @@
+@prefix : <http://mtbmas#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix saref: <https://saref.etsi.org/core/v3.2.1/> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix mbtmas: <http://www.owl-ontologies.com/mbtmas#> .
+@prefix mtbmas: <http://mtbmas#> .
+@prefix s4bldg: <https://saref.etsi.org/saref4bldg/> .
+@base <http://mtbmas#> .
+
+<http://mtbmas#> rdf:type owl:Ontology ;
+                  owl:backwardCompatibleWith <https://w3id.org/example/1.0.0> ;
+                  owl:incompatibleWith <https://w3id.org/example/0.2.0> ;
+                  owl:priorVersion <https://w3id.org/example/1.0.0> ;
+                  owl:versionInfo "0.0.1" ;
+                  mod:createdWith <https://chowlk.linkeddata.es/> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#backwardCompatibleWith
+owl:backwardCompatibleWith rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#incompatibleWith
+owl:incompatibleWith rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#priorVersion
+owl:priorVersion rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#versionInfo
+owl:versionInfo rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/mod#createdWith
+mod:createdWith rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://mtbmas#canAcess
+mtbmas:canAcess rdf:type owl:ObjectProperty ;
+                rdfs:domain mtbmas:Person ;
+                rdfs:label "can acess" .
+
+
+###  http://mtbmas#canBe
+mtbmas:canBe rdf:type owl:ObjectProperty ;
+             rdfs:domain mtbmas:Owner ;
+             rdfs:range mtbmas:Tenant ;
+             rdfs:label "can be" .
+
+
+###  http://mtbmas#canUse
+mtbmas:canUse rdf:type owl:ObjectProperty ;
+              rdfs:domain mtbmas:Person ;
+              rdfs:range mtbmas:Service ;
+              rdfs:label "can use" .
+
+
+###  http://mtbmas#contains
+mtbmas:contains rdf:type owl:ObjectProperty ;
+                rdfs:range mtbmas:Device ;
+                rdfs:label "contains" .
+
+
+###  http://mtbmas#containsAgent
+mtbmas:containsAgent rdf:type owl:ObjectProperty ;
+                     owl:inverseOf mtbmas:locatedIn ;
+                     rdfs:range mtbmas:ServiceAgentManager ;
+                     rdfs:label "contains agent" .
+
+
+###  http://mtbmas#controlsDevice
+mtbmas:controlsDevice rdf:type owl:ObjectProperty ;
+                      owl:inverseOf mtbmas:isControledBy ;
+                      rdfs:domain mtbmas:ServiceAgentManager ;
+                      rdfs:range mtbmas:Device ;
+                      rdfs:label "controls device" .
+
+
+###  http://mtbmas#hasOccupiant
+mtbmas:hasOccupiant rdf:type owl:ObjectProperty ;
+                    rdfs:domain mtbmas:Tenant ;
+                    rdfs:range mtbmas:Occupant ;
+                    rdfs:label "has occupiant" .
+
+
+###  http://mtbmas#hasPerson
+mtbmas:hasPerson rdf:type owl:ObjectProperty ;
+                 rdfs:domain mtbmas:Building ;
+                 rdfs:range mtbmas:Person ;
+                 rdfs:label "has person" .
+
+
+###  http://mtbmas#hasResult
+mtbmas:hasResult rdf:type owl:ObjectProperty ;
+                 owl:inverseOf mtbmas:isResultOf ;
+                 rdfs:domain mtbmas:Simulation ;
+                 rdfs:range mtbmas:SimulationResult ;
+                 rdfs:label "has result" .
+
+
+###  http://mtbmas#hasSimulationModel
+mtbmas:hasSimulationModel rdf:type owl:ObjectProperty ;
+                          owl:inverseOf mtbmas:isSimModelOf ;
+                          rdfs:range mtbmas:SpaceSimulationModel ;
+                          rdfs:label "has simulation model" .
+
+
+###  http://mtbmas#hasSpace
+mtbmas:hasSpace rdf:type owl:ObjectProperty ;
+                owl:inverseOf mtbmas:isSspaceOf ;
+                rdf:type owl:TransitiveProperty ;
+                rdfs:domain mtbmas:Building ,
+                            mtbmas:Space ;
+                rdfs:range mtbmas:Space ;
+                rdfs:label "has space" .
+
+
+###  http://mtbmas#hasTenant
+mtbmas:hasTenant rdf:type owl:ObjectProperty ;
+                 rdfs:domain mtbmas:Building ;
+                 rdfs:range mtbmas:Tenant .
+
+
+###  http://mtbmas#hasVisitor
+mtbmas:hasVisitor rdf:type owl:ObjectProperty ;
+                  rdfs:domain mtbmas:Tenant ;
+                  rdfs:range mtbmas:Visitor ;
+                  rdfs:label "has visitor" .
+
+
+###  http://mtbmas#interactWith
+mtbmas:interactWith rdf:type owl:ObjectProperty ;
+                    rdfs:domain mtbmas:Tenant ;
+                    rdfs:range mtbmas:ServiceAgentManager ;
+                    rdfs:label "interact with" .
+
+
+###  http://mtbmas#isControledBy
+mtbmas:isControledBy rdf:type owl:ObjectProperty ;
+                     rdfs:domain mtbmas:Device ;
+                     rdfs:range mtbmas:ServiceAgentManager ;
+                     rdfs:label "is Controled By" .
+
+
+###  http://mtbmas#isOfferedBy
+mtbmas:isOfferedBy rdf:type owl:ObjectProperty ;
+                   owl:inverseOf mtbmas:offers ;
+                   rdfs:domain saref:Service ;
+                   rdfs:range mtbmas:Device ,
+                              mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#isOwnedBy
+mtbmas:isOwnedBy rdf:type owl:ObjectProperty ;
+                 owl:inverseOf mtbmas:owns ;
+                 rdfs:domain mtbmas:Building ,
+                             mtbmas:Space ;
+                 rdfs:range mtbmas:Owner .
+
+
+###  http://mtbmas#isResultOf
+mtbmas:isResultOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain mtbmas:SimulationResult ;
+                  rdfs:range mtbmas:Simulation .
+
+
+###  http://mtbmas#isSimModelOf
+mtbmas:isSimModelOf rdf:type owl:ObjectProperty ;
+                    rdfs:domain mtbmas:SpaceSimulationModel ;
+                    rdfs:range mtbmas:Space .
+
+
+###  http://mtbmas#isSspaceOf
+mtbmas:isSspaceOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain mtbmas:Space ;
+                  rdfs:range mtbmas:Building ,
+                             mtbmas:Space .
+
+
+###  http://mtbmas#isTenantOf
+mtbmas:isTenantOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain mtbmas:Tenant ;
+                  rdfs:range mtbmas:Building ;
+                  rdfs:label "is tenant of" .
+
+
+###  http://mtbmas#isUsedBy
+mtbmas:isUsedBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf mtbmas:useResult ;
+                rdfs:domain mtbmas:SimulationResult ;
+                rdfs:range mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#locatedIn
+mtbmas:locatedIn rdf:type owl:ObjectProperty ;
+                 owl:inverseOf s4bldg:contains ;
+                 rdfs:domain mtbmas:ServiceAgentManager ;
+                 rdfs:range mtbmas:Space .
+
+
+###  http://mtbmas#occupies
+mtbmas:occupies rdf:type owl:ObjectProperty ;
+                rdfs:domain mtbmas:Tenant ;
+                rdfs:label "occupies" .
+
+
+###  http://mtbmas#offers
+mtbmas:offers rdf:type owl:ObjectProperty ;
+              rdfs:domain mtbmas:Device ;
+              rdfs:range mtbmas:Service ;
+              rdfs:label "offers" .
+
+
+###  http://mtbmas#offersSpecificService
+mtbmas:offersSpecificService rdf:type owl:ObjectProperty ;
+                             rdfs:domain mtbmas:ServiceAgentManager ;
+                             rdfs:range mtbmas:Service ;
+                             rdfs:label "offers specific service" .
+
+
+###  http://mtbmas#owns
+mtbmas:owns rdf:type owl:ObjectProperty ;
+            rdfs:domain mtbmas:Owner ;
+            rdfs:range mtbmas:Building ;
+            rdfs:label "owns" .
+
+
+###  http://mtbmas#producedBy
+mtbmas:producedBy rdf:type owl:ObjectProperty ;
+                  owl:inverseOf mtbmas:producesSim ;
+                  rdfs:domain mtbmas:Simulation ;
+                  rdfs:range mtbmas:SpaceSimulationModel .
+
+
+###  http://mtbmas#producesSim
+mtbmas:producesSim rdf:type owl:ObjectProperty ;
+                   rdfs:domain mtbmas:SpaceSimulationModel ;
+                   rdfs:range mtbmas:Simulation ;
+                   rdfs:label "produces sim" .
+
+
+###  http://mtbmas#providesInputDataSimulation
+mtbmas:providesInputDataSimulation rdf:type owl:ObjectProperty ;
+                                   rdfs:domain mtbmas:ServiceAgentManager ;
+                                   rdfs:range mtbmas:Simulation ;
+                                   rdfs:label "provides Input Data Simulation" .
+
+
+###  http://mtbmas#useResult
+mtbmas:useResult rdf:type owl:ObjectProperty ;
+                 rdfs:domain mtbmas:ServiceAgentManager ;
+                 rdfs:range mtbmas:SimulationResult ;
+                 rdfs:label "use result" .
+
+
+###  https://saref.etsi.org/saref4bldg/contains
+s4bldg:contains rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://mtbmas#input_val
+mtbmas:input_val rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain mtbmas:Simulation ;
+                 rdfs:range xsd:double .
+
+
+###  http://mtbmas#predictValue
+mtbmas:predictValue rdf:type owl:DatatypeProperty ;
+                    rdfs:domain mtbmas:SimulationResult ;
+                    rdfs:range xsd:double .
+
+
+###  http://mtbmas#weather
+mtbmas:weather rdf:type owl:DatatypeProperty ;
+               rdfs:domain mtbmas:Simulation ;
+               rdfs:range xsd:double .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://mtbmas#Building
+mtbmas:Building rdf:type owl:Class ;
+                rdfs:subClassOf s4bldg:Building ;
+                rdfs:label "Building" .
+
+
+###  http://mtbmas#Device
+mtbmas:Device rdf:type owl:Class ;
+              rdfs:subClassOf saref:Device ;
+              rdfs:label "Device" .
+
+
+###  http://mtbmas#Floor
+mtbmas:Floor rdf:type owl:Class ;
+             rdfs:subClassOf mtbmas:Space .
+
+
+###  http://mtbmas#Occupant
+mtbmas:Occupant rdf:type owl:Class ;
+                rdfs:subClassOf mtbmas:Person ;
+                rdfs:label "Occupant" .
+
+
+###  http://mtbmas#Owner
+mtbmas:Owner rdf:type owl:Class ;
+             rdfs:label "Owner" .
+
+
+###  http://mtbmas#Person
+mtbmas:Person rdf:type owl:Class ;
+              rdfs:label "Person" .
+
+
+###  http://mtbmas#Room
+mtbmas:Room rdf:type owl:Class ;
+            rdfs:subClassOf mtbmas:Space .
+
+
+###  http://mtbmas#Service
+mtbmas:Service rdf:type owl:Class ;
+               rdfs:subClassOf saref:Service ;
+               rdfs:label "Service" .
+
+
+###  http://mtbmas#ServiceAgentManager
+mtbmas:ServiceAgentManager rdf:type owl:Class ;
+                           owl:disjointUnionOf ( mtbmas:ServiceAirQualityAgentManager
+                                                 mtbmas:ServiceCoolingAgentManager
+                                                 mtbmas:ServiceHeatingAgentManager
+                                                 mtbmas:ServiceLightingAgentManager
+                                                 mtbmas:ServiceVentilationAgentManager
+                                               ) ;
+                           rdfs:label "Service Agent Manager" .
+
+
+###  http://mtbmas#ServiceAirQualityAgentManager
+mtbmas:ServiceAirQualityAgentManager rdf:type owl:Class ;
+                                     rdfs:subClassOf mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#ServiceCoolingAgentManager
+mtbmas:ServiceCoolingAgentManager rdf:type owl:Class ;
+                                  rdfs:subClassOf mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#ServiceHeatingAgentManager
+mtbmas:ServiceHeatingAgentManager rdf:type owl:Class ;
+                                  rdfs:subClassOf mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#ServiceLightingAgentManager
+mtbmas:ServiceLightingAgentManager rdf:type owl:Class ;
+                                   rdfs:subClassOf mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#ServiceVentilationAgentManager
+mtbmas:ServiceVentilationAgentManager rdf:type owl:Class ;
+                                      rdfs:subClassOf mtbmas:ServiceAgentManager .
+
+
+###  http://mtbmas#Simulation
+mtbmas:Simulation rdf:type owl:Class ;
+                  rdfs:label "Simulation" .
+
+
+###  http://mtbmas#SimulationResult
+mtbmas:SimulationResult rdf:type owl:Class ;
+                        rdfs:label "Simulation Result" .
+
+
+###  http://mtbmas#Space
+mtbmas:Space rdf:type owl:Class ;
+             rdfs:subClassOf s4bldg:BuildingSpace ;
+             rdfs:label "Space" .
+
+
+###  http://mtbmas#SpaceSimulationModel
+mtbmas:SpaceSimulationModel rdf:type owl:Class ;
+                            rdfs:label "Space Simulation Model" .
+
+
+###  http://mtbmas#Tenant
+mtbmas:Tenant rdf:type owl:Class ;
+              rdfs:label "Tenant" .
+
+
+###  http://mtbmas#Visitor
+mtbmas:Visitor rdf:type owl:Class ;
+               rdfs:subClassOf mtbmas:Person ;
+               rdfs:label "Visitor" .
+
+
+###  http://mtbmas#Zone
+mtbmas:Zone rdf:type owl:Class ;
+            rdfs:subClassOf mtbmas:Space .
+
+
+###  https://saref.etsi.org/core/v3.2.1/Device
+saref:Device rdf:type owl:Class ;
+             rdfs:label "Device" .
+
+
+###  https://saref.etsi.org/core/v3.2.1/Service
+saref:Service rdf:type owl:Class ;
+              rdfs:label "Service" .
+
+
+###  https://saref.etsi.org/saref4bldg/Building
+s4bldg:Building rdf:type owl:Class ;
+                rdfs:label "Building" .
+
+
+###  https://saref.etsi.org/saref4bldg/BuildingSpace
+s4bldg:BuildingSpace rdf:type owl:Class ;
+                     rdfs:label "Building Space" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://mtbmas#EDF
+mtbmas:EDF rdf:type owl:NamedIndividual ,
+                    mtbmas:Owner ;
+           mtbmas:owns mtbmas:EDF_Renardiere .
+
+
+###  http://mtbmas#EDF_Renardiere
+mtbmas:EDF_Renardiere rdf:type owl:NamedIndividual ,
+                               mtbmas:Building ;
+                      mtbmas:hasSpace mtbmas:K15 .
+
+
+###  http://mtbmas#First_Floor
+mtbmas:First_Floor rdf:type owl:NamedIndividual ,
+                            mtbmas:Floor ;
+                   mtbmas:hasSpace mtbmas:first_floor_north ,
+                                   mtbmas:first_floor_south .
+
+
+###  http://mtbmas#First_Floor_North_LightingManager
+mtbmas:First_Floor_North_LightingManager rdf:type owl:NamedIndividual ,
+                                                  mtbmas:ServiceLightingAgentManager .
+
+
+###  http://mtbmas#First_Floor_North_ServiceHeatingAgentManager
+mtbmas:First_Floor_North_ServiceHeatingAgentManager rdf:type owl:NamedIndividual ,
+                                                             mtbmas:ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#First_Floor_South_LightingManager
+mtbmas:First_Floor_South_LightingManager rdf:type owl:NamedIndividual ,
+                                                  mtbmas:ServiceLightingAgentManager .
+
+
+###  http://mtbmas#First_Floor_South_ServiceHeatingAgentManager
+mtbmas:First_Floor_South_ServiceHeatingAgentManager rdf:type owl:NamedIndividual ,
+                                                             mtbmas:ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#Ground
+mtbmas:Ground rdf:type owl:NamedIndividual ,
+                       mtbmas:Floor ;
+              mtbmas:hasSpace mtbmas:ground_north ,
+                              mtbmas:ground_south .
+
+
+###  http://mtbmas#K15
+mtbmas:K15 rdf:type owl:NamedIndividual ,
+                    mtbmas:Space ;
+           mtbmas:hasSpace mtbmas:First_Floor ,
+                           mtbmas:Ground .
+
+
+###  http://mtbmas#Labo_K002
+mtbmas:Labo_K002 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Labo_K003
+mtbmas:Labo_K003 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Labo_K004
+mtbmas:Labo_K004 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Labo_K006
+mtbmas:Labo_K006 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Labo_K010
+mtbmas:Labo_K010 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Labo_K020
+mtbmas:Labo_K020 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Local_detente_K009
+mtbmas:Local_detente_K009 rdf:type owl:NamedIndividual ,
+                                   mtbmas:Room .
+
+
+###  http://mtbmas#Local_detente_K011
+mtbmas:Local_detente_K011 rdf:type owl:NamedIndividual ,
+                                   mtbmas:Room .
+
+
+###  http://mtbmas#POD2-00335
+mtbmas:POD2-00335 rdf:type owl:NamedIndividual ,
+                           mtbmas:Device ;
+                  mtbmas:isControledBy mtbmas:RDCN_ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#POD2-00337
+mtbmas:POD2-00337 rdf:type owl:NamedIndividual ,
+                           mtbmas:Device ;
+                  mtbmas:isControledBy mtbmas:RDCN_ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#POD2-00338
+mtbmas:POD2-00338 rdf:type owl:NamedIndividual ,
+                           mtbmas:Device ;
+                  mtbmas:isControledBy mtbmas:First_Floor_North_ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#POD2-00340
+mtbmas:POD2-00340 rdf:type owl:NamedIndividual ,
+                           mtbmas:Device ;
+                  mtbmas:isControledBy mtbmas:First_Floor_South_ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#POD2-00341
+mtbmas:POD2-00341 rdf:type owl:NamedIndividual ,
+                           mtbmas:Device ;
+                  mtbmas:isControledBy mtbmas:RDCN_LightingManager .
+
+
+###  http://mtbmas#RDCN_CoolingAgentManager
+mtbmas:RDCN_CoolingAgentManager rdf:type owl:NamedIndividual ,
+                                         mtbmas:ServiceCoolingAgentManager ;
+                                mtbmas:controlsDevice mtbmas:POD2-00335 .
+
+
+###  http://mtbmas#RDCN_LightingManager
+mtbmas:RDCN_LightingManager rdf:type owl:NamedIndividual ,
+                                     mtbmas:ServiceLightingAgentManager .
+
+
+###  http://mtbmas#RDCN_ServiceHeatingAgentManager
+mtbmas:RDCN_ServiceHeatingAgentManager rdf:type owl:NamedIndividual ,
+                                                mtbmas:ServiceHeatingAgentManager ;
+                                       mtbmas:offersSpecificService mtbmas:heatingService ;
+                                       mtbmas:providesInputDataSimulation mtbmas:simRDCN ;
+                                       mtbmas:useResult mtbmas:resultSimRDCN .
+
+
+###  http://mtbmas#RDCN_VENTILATION_AGENT_MANAGER
+mtbmas:RDCN_VENTILATION_AGENT_MANAGER rdf:type owl:NamedIndividual ,
+                                               mtbmas:ServiceVentilationAgentManager ;
+                                      mtbmas:controlsDevice mtbmas:POD2-00335 .
+
+
+###  http://mtbmas#RDCS_LightingManager
+mtbmas:RDCS_LightingManager rdf:type owl:NamedIndividual ,
+                                     mtbmas:ServiceLightingAgentManager .
+
+
+###  http://mtbmas#RDCS_ServiceHeatingAgentManager
+mtbmas:RDCS_ServiceHeatingAgentManager rdf:type owl:NamedIndividual ,
+                                                mtbmas:ServiceHeatingAgentManager .
+
+
+###  http://mtbmas#Room_K001
+mtbmas:Room_K001 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K012
+mtbmas:Room_K012 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K013
+mtbmas:Room_K013 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K014
+mtbmas:Room_K014 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K015
+mtbmas:Room_K015 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K016
+mtbmas:Room_K016 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K017
+mtbmas:Room_K017 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K101
+mtbmas:Room_K101 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K103
+mtbmas:Room_K103 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K104
+mtbmas:Room_K104 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K105
+mtbmas:Room_K105 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K106
+mtbmas:Room_K106 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K107
+mtbmas:Room_K107 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K108
+mtbmas:Room_K108 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K109
+mtbmas:Room_K109 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K110
+mtbmas:Room_K110 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K111
+mtbmas:Room_K111 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K112
+mtbmas:Room_K112 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K113
+mtbmas:Room_K113 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K114
+mtbmas:Room_K114 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K115
+mtbmas:Room_K115 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K116
+mtbmas:Room_K116 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K117
+mtbmas:Room_K117 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K118
+mtbmas:Room_K118 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K119
+mtbmas:Room_K119 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K120
+mtbmas:Room_K120 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K121
+mtbmas:Room_K121 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K122
+mtbmas:Room_K122 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K123
+mtbmas:Room_K123 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K124
+mtbmas:Room_K124 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K125
+mtbmas:Room_K125 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K126
+mtbmas:Room_K126 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#Room_K127
+mtbmas:Room_K127 rdf:type owl:NamedIndividual ,
+                          mtbmas:Room .
+
+
+###  http://mtbmas#SEQUOIA
+mtbmas:SEQUOIA rdf:type owl:NamedIndividual ,
+                        mtbmas:Tenant ;
+               mtbmas:interactWith mtbmas:RDCN_ServiceHeatingAgentManager ;
+               mtbmas:isTenantOf mtbmas:EDF_Renardiere ;
+               mtbmas:occupies mtbmas:ground_north .
+
+
+###  http://mtbmas#Serveur_Dep_K100
+mtbmas:Serveur_Dep_K100 rdf:type owl:NamedIndividual ,
+                                 mtbmas:Room .
+
+
+###  http://mtbmas#first_floor_north
+mtbmas:first_floor_north rdf:type owl:NamedIndividual ,
+                                  mtbmas:Zone ;
+                         mtbmas:containsAgent mtbmas:First_Floor_North_LightingManager ,
+                                              mtbmas:First_Floor_North_ServiceHeatingAgentManager ;
+                         mtbmas:hasSpace mtbmas:Room_K113 ,
+                                         mtbmas:Room_K114 ,
+                                         mtbmas:Room_K115 ,
+                                         mtbmas:Room_K116 ,
+                                         mtbmas:Room_K117 ,
+                                         mtbmas:Room_K118 ,
+                                         mtbmas:Room_K119 ,
+                                         mtbmas:Room_K120 ,
+                                         mtbmas:Room_K121 ,
+                                         mtbmas:Room_K122 ,
+                                         mtbmas:Room_K123 ,
+                                         mtbmas:Room_K124 ,
+                                         mtbmas:Room_K125 ,
+                                         mtbmas:Room_K126 ,
+                                         mtbmas:Room_K127 ,
+                                         <http://mtbmas#1H2> ,
+                                         <http://mtbmas#1S3> .
+
+
+###  http://mtbmas#first_floor_south
+mtbmas:first_floor_south rdf:type owl:NamedIndividual ,
+                                  mtbmas:Zone ;
+                         mtbmas:containsAgent mtbmas:First_Floor_South_LightingManager ,
+                                              mtbmas:First_Floor_South_ServiceHeatingAgentManager ;
+                         mtbmas:hasSpace mtbmas:Room_K103 ,
+                                         mtbmas:Room_K105 ,
+                                         mtbmas:Room_K106 ,
+                                         mtbmas:Room_K107 ,
+                                         mtbmas:Room_K108 ,
+                                         mtbmas:Room_K110 ,
+                                         mtbmas:Room_K111 ,
+                                         mtbmas:Serveur_Dep_K100 ,
+                                         mtbmas:salle_de_reunion_K102 ,
+                                         <http://mtbmas#1S2> .
+
+
+###  http://mtbmas#ground_north
+mtbmas:ground_north rdf:type owl:NamedIndividual ,
+                             mtbmas:Zone ;
+                    mtbmas:containsAgent mtbmas:RDCN_CoolingAgentManager ,
+                                         mtbmas:RDCN_LightingManager ,
+                                         mtbmas:RDCN_ServiceHeatingAgentManager ,
+                                         mtbmas:RDCN_VENTILATION_AGENT_MANAGER ;
+                    mtbmas:hasSimulationModel mtbmas:simModRDCN ;
+                    mtbmas:hasSpace mtbmas:Labo_K020 ,
+                                    mtbmas:Local_detente_K011 ,
+                                    mtbmas:Room_K012 ,
+                                    mtbmas:Room_K013 ,
+                                    mtbmas:Room_K014 ,
+                                    mtbmas:Room_K015 ,
+                                    mtbmas:Room_K016 ,
+                                    mtbmas:Room_K017 ,
+                                    mtbmas:sanitaire_K002 ,
+                                    mtbmas:sanitaire_K0S1 ,
+                                    mtbmas:sanitaire_K0S2 ,
+                                    <http://mtbmas#0H3> .
+
+
+###  http://mtbmas#ground_south
+mtbmas:ground_south rdf:type owl:NamedIndividual ,
+                             mtbmas:Zone .
+
+
+###  http://mtbmas#heatingService
+mtbmas:heatingService rdf:type owl:NamedIndividual ,
+                               mtbmas:Service .
+
+
+###  http://mtbmas#local_technicien_K023
+mtbmas:local_technicien_K023 rdf:type owl:NamedIndividual ,
+                                      mtbmas:Room .
+
+
+###  http://mtbmas#resultSimRDCN
+mtbmas:resultSimRDCN rdf:type owl:NamedIndividual ,
+                              mtbmas:SimulationResult ;
+                     mtbmas:predictValue "14.0"^^xsd:double .
+
+
+###  http://mtbmas#salle_de_reunion_K007
+mtbmas:salle_de_reunion_K007 rdf:type owl:NamedIndividual ,
+                                      mtbmas:Room .
+
+
+###  http://mtbmas#salle_de_reunion_K102
+mtbmas:salle_de_reunion_K102 rdf:type owl:NamedIndividual ,
+                                      mtbmas:Room .
+
+
+###  http://mtbmas#sanitaire_K002
+mtbmas:sanitaire_K002 rdf:type owl:NamedIndividual ,
+                               mtbmas:Room .
+
+
+###  http://mtbmas#sanitaire_K0S1
+mtbmas:sanitaire_K0S1 rdf:type owl:NamedIndividual ,
+                               mtbmas:Room .
+
+
+###  http://mtbmas#sanitaire_K0S2
+mtbmas:sanitaire_K0S2 rdf:type owl:NamedIndividual ,
+                               mtbmas:Room ;
+                      mtbmas:contains mtbmas:POD2-00335 ,
+                                      mtbmas:POD2-00337 .
+
+
+###  http://mtbmas#simModRDCN
+mtbmas:simModRDCN rdf:type owl:NamedIndividual ,
+                           mtbmas:SpaceSimulationModel ;
+                  mtbmas:producesSim mtbmas:simRDCN .
+
+
+###  http://mtbmas#simModelRDCS
+mtbmas:simModelRDCS rdf:type owl:NamedIndividual ,
+                             mtbmas:SpaceSimulationModel ;
+                    mtbmas:producesSim mtbmas:simRDCN .
+
+
+###  http://mtbmas#simRDCN
+mtbmas:simRDCN rdf:type owl:NamedIndividual ,
+                        mtbmas:Simulation ;
+               mtbmas:hasResult mtbmas:resultSimRDCN ;
+               mtbmas:input_val "12.0"^^xsd:double ;
+               mtbmas:weather 14 .
+
+
+###  http://mtbmas#0H1
+<http://mtbmas#0H1> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#0H2
+<http://mtbmas#0H2> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#0H3
+<http://mtbmas#0H3> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#0H6
+<http://mtbmas#0H6> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#1H1
+<http://mtbmas#1H1> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#1H2
+<http://mtbmas#1H2> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#1S1
+<http://mtbmas#1S1> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#1S2
+<http://mtbmas#1S2> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+###  http://mtbmas#1S3
+<http://mtbmas#1S3> rdf:type owl:NamedIndividual ,
+                             mtbmas:Room .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<http://mtbmasb> rdf:type swrl:Variable .
+
+<http://mtbmasbs> rdf:type swrl:Variable .
+
+<http://mtbmasd> rdf:type swrl:Variable .
+
+<http://mtbmasa> rdf:type swrl:Variable .
+
+<http://mtbmast> rdf:type swrl:Variable .
+
+<http://mtbmass> rdf:type swrl:Variable .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment "if an space of the building contains an agent then the building contains this agent too" ;
+   rdfs:label "Agent belongs to building" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mtbmas:Building ;
+                           swrl:argument1 <http://mtbmasb>
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:ClassAtom ;
+                                      swrl:classPredicate mtbmas:Space ;
+                                      swrl:argument1 <http://mtbmasbs>
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                 swrl:propertyPredicate mtbmas:hasSpace ;
+                                                 swrl:argument1 <http://mtbmasb> ;
+                                                 swrl:argument2 <http://mtbmasbs>
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:ClassAtom ;
+                                                            swrl:classPredicate mtbmas:ServiceAgentManager ;
+                                                            swrl:argument1 <http://mtbmasa>
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                       swrl:propertyPredicate mtbmas:containsAgent ;
+                                                                       swrl:argument1 <http://mtbmasbs> ;
+                                                                       swrl:argument2 <http://mtbmasa>
+                                                                     ] ;
+                                                           rdf:rest rdf:nil
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate mtbmas:containsAgent ;
+                           swrl:argument1 <http://mtbmasb> ;
+                           swrl:argument2 <http://mtbmasa>
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment "if a tenant occupies an space of the building then he can use the service offered by the device intalled in this space" ;
+   rdfs:label "Service offered by a Device that the tenant can use" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mtbmas:Tenant ;
+                           swrl:argument1 <http://mtbmast>
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:ClassAtom ;
+                                      swrl:classPredicate mtbmas:Space ;
+                                      swrl:argument1 <http://mtbmasbs>
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:ClassAtom ;
+                                                 swrl:classPredicate mtbmas:Device ;
+                                                 swrl:argument1 <http://mtbmasd>
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:ClassAtom ;
+                                                            swrl:classPredicate mtbmas:Service ;
+                                                            swrl:argument1 <http://mtbmass>
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                       swrl:propertyPredicate mtbmas:offers ;
+                                                                       swrl:argument1 <http://mtbmasd> ;
+                                                                       swrl:argument2 <http://mtbmass>
+                                                                     ] ;
+                                                           rdf:rest [ rdf:type swrl:AtomList ;
+                                                                      rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                                  swrl:propertyPredicate mtbmas:occupies ;
+                                                                                  swrl:argument1 <http://mtbmast> ;
+                                                                                  swrl:argument2 <http://mtbmasbs>
+                                                                                ] ;
+                                                                      rdf:rest [ rdf:type swrl:AtomList ;
+                                                                                 rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                                             swrl:propertyPredicate mtbmas:contains ;
+                                                                                             swrl:argument1 <http://mtbmasbs> ;
+                                                                                             swrl:argument2 <http://mtbmasd>
+                                                                                           ] ;
+                                                                                 rdf:rest rdf:nil
+                                                                               ]
+                                                                    ]
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate mtbmas:canUse ;
+                           swrl:argument1 <http://mtbmast> ;
+                           swrl:argument2 <http://mtbmass>
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment "if a tenant occupies an space of the building then he can use the service offered by the agent intalled in this space" ;
+   rdfs:label "Service offered by an agent and the tenant can use" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mtbmas:Tenant ;
+                           swrl:argument1 <http://mtbmast>
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:ClassAtom ;
+                                      swrl:classPredicate mtbmas:Space ;
+                                      swrl:argument1 <http://mtbmasbs>
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:ClassAtom ;
+                                                 swrl:classPredicate mtbmas:ServiceAgentManager ;
+                                                 swrl:argument1 <http://mtbmasa>
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:ClassAtom ;
+                                                            swrl:classPredicate mtbmas:Service ;
+                                                            swrl:argument1 <http://mtbmass>
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                       swrl:propertyPredicate mtbmas:offersSpecificService ;
+                                                                       swrl:argument1 <http://mtbmasa> ;
+                                                                       swrl:argument2 <http://mtbmass>
+                                                                     ] ;
+                                                           rdf:rest [ rdf:type swrl:AtomList ;
+                                                                      rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                                  swrl:propertyPredicate mtbmas:occupies ;
+                                                                                  swrl:argument1 <http://mtbmast> ;
+                                                                                  swrl:argument2 <http://mtbmasbs>
+                                                                                ] ;
+                                                                      rdf:rest [ rdf:type swrl:AtomList ;
+                                                                                 rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                                             swrl:propertyPredicate mtbmas:containsAgent ;
+                                                                                             swrl:argument1 <http://mtbmasbs> ;
+                                                                                             swrl:argument2 <http://mtbmasa>
+                                                                                           ] ;
+                                                                                 rdf:rest rdf:nil
+                                                                               ]
+                                                                    ]
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate mtbmas:canUse ;
+                           swrl:argument1 <http://mtbmast> ;
+                           swrl:argument2 <http://mtbmass>
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment "if a space of the buiding contains a Device then this device is contained in the building" ;
+   rdfs:label "Device contened in a Buiding" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate mtbmas:Building ;
+                           swrl:argument1 <http://mtbmasb>
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:ClassAtom ;
+                                      swrl:classPredicate mtbmas:Space ;
+                                      swrl:argument1 <http://mtbmasbs>
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                 swrl:propertyPredicate mtbmas:hasSpace ;
+                                                 swrl:argument1 <http://mtbmasb> ;
+                                                 swrl:argument2 <http://mtbmasbs>
+                                               ] ;
+                                     rdf:rest [ rdf:type swrl:AtomList ;
+                                                rdf:first [ rdf:type swrl:ClassAtom ;
+                                                            swrl:classPredicate mtbmas:Device ;
+                                                            swrl:argument1 <http://mtbmasd>
+                                                          ] ;
+                                                rdf:rest [ rdf:type swrl:AtomList ;
+                                                           rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                                       swrl:propertyPredicate mtbmas:contains ;
+                                                                       swrl:argument1 <http://mtbmasbs> ;
+                                                                       swrl:argument2 <http://mtbmasd>
+                                                                     ] ;
+                                                           rdf:rest rdf:nil
+                                                         ]
+                                              ]
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate mtbmas:contains ;
+                           swrl:argument1 <http://mtbmasb> ;
+                           swrl:argument2 <http://mtbmasd>
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
